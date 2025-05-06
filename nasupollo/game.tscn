@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgl8ae6vc5nsa"]
+[gd_scene load_steps=6 format=3 uid="uid://cgl8ae6vc5nsa"]
 
 [ext_resource type="Script" uid="uid://uu8wflpl3s8f" path="res://player.gd" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://vdspuepjdl2j" path="res://game.gd" id="1_feb5d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mwb40"]
 size = Vector3(0.5, 1, 0.5)
@@ -12,9 +13,11 @@ size = Vector3(10, 4, 1)
 size = Vector3(1, 5, 1)
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_feb5d")
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="." groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+collision_layer = 2
 script = ExtResource("1_80nbo")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Player"]
@@ -23,8 +26,9 @@ size = Vector3(0.5, 1, 0.5)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("BoxShape3D_mwb40")
 
-[node name="Terrain" type="StaticBody3D" parent="."]
+[node name="Terrain" type="StaticBody3D" parent="." groups=["Environment"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
 size = Vector3(10, 4, 1)
@@ -33,6 +37,7 @@ size = Vector3(10, 4, 1)
 shape = SubResource("BoxShape3D_80nbo")
 
 [node name="MapBoundries" type="StaticBody3D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapBoundries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
@@ -47,3 +52,15 @@ transform = Transform3D(1, 0, 0, 0, 0.997575, 0.0695998, 0, -0.0695998, 0.997575
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.326888, -0.661874, 0.674587, 0, 0.713801, 0.700349, -0.945063, -0.228936, 0.233333, -9.47653, 0, 0)
+
+[node name="CollectableObjects" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollectableObjectTimer" type="Timer" parent="CollectableObjects"]
+unique_name_in_owner = true
+
+[node name="CollectableObjectSpawner" type="Marker3D" parent="CollectableObjects"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[connection signal="timeout" from="CollectableObjects/CollectableObjectTimer" to="." method="_on_collectable_object_timer_timeout"]
