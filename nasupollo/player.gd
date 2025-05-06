@@ -12,19 +12,20 @@ const JUMP = 10.0
 
 
 func _physics_process(delta):
-	var input_direction = Input.get_axis("MoveLeft", "MoveRight")
-	if input_direction != 0.0:
-		if is_on_floor():
-			velocity.x += input_direction * self.SPEED * delta
+	if !GameState.game_paused:
+		var input_direction = Input.get_axis("MoveLeft", "MoveRight")
+		if input_direction != 0.0:
+			if is_on_floor():
+				velocity.x += input_direction * self.SPEED * delta
+			else:
+				velocity.x += input_direction * self.SPEED_AIR * delta
+			velocity.x = clamp(velocity.x, -self.SPEED_MAX, self.SPEED_MAX)
 		else:
-			velocity.x += input_direction * self.SPEED_AIR * delta
-		velocity.x = clamp(velocity.x, -self.SPEED_MAX, self.SPEED_MAX)
-	else:
-		if is_on_floor():
-			velocity.x = lerp(velocity.x, 0.0, self.FRICTION)
-		else:
-			velocity.x = lerp(velocity.x, 0.0, self.FRICTION_AIR)
-	if is_on_floor() and Input.is_action_just_pressed("Jump"):
-		velocity.y += self.JUMP
-	velocity.y -= self.GRAVITY * delta
-	move_and_slide()
+			if is_on_floor():
+				velocity.x = lerp(velocity.x, 0.0, self.FRICTION)
+			else:
+				velocity.x = lerp(velocity.x, 0.0, self.FRICTION_AIR)
+		if is_on_floor() and Input.is_action_just_pressed("Jump"):
+			velocity.y += self.JUMP
+		velocity.y -= self.GRAVITY * delta
+		move_and_slide()
