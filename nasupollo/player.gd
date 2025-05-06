@@ -1,5 +1,8 @@
+class_name Player
 extends CharacterBody3D
 
+
+signal gain_score(score: int)
 
 const SPEED = 450.0
 const SPEED_MAX = 4.5
@@ -27,3 +30,6 @@ func _physics_process(delta):
 		velocity.y += JUMP
 	velocity.y -= GRAVITY * delta
 	move_and_slide()
+
+func process_score(score: int):
+	gain_score.emit(score)
