@@ -5,8 +5,12 @@ extends Area3D
 const FALL_SPEED = 3.0
 
 
+func _ready():
+	GameSignals.game_over.connect(delete_self_on_game_over)
+
 func _physics_process(delta):
-	position.y -= self.FALL_SPEED * delta
+	if !GameState.game_paused:
+		position.y -= self.FALL_SPEED * delta
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
@@ -17,3 +21,6 @@ func _on_body_entered(body):
 		print_debug("Damage player!")
 		GameSignals.loose_life_point.emit()
 		queue_free()
+
+func delete_self_on_game_over():
+	queue_free()
