@@ -11,6 +11,7 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		print_debug("Gain points!")
+		body.process_score(10)
 		queue_free()
 	elif body.is_in_group("Environment"):
 		print_debug("Damage player!")
