@@ -25,6 +25,10 @@ func _physics_process(delta):
 				velocity.x = lerp(velocity.x, 0.0, self.FRICTION)
 			else:
 				velocity.x = lerp(velocity.x, 0.0, self.FRICTION_AIR)
+		if velocity.x < 0.0:
+			rotation.y = deg_to_rad(0.0)
+		elif velocity.x > 0.0:
+			rotation.y = deg_to_rad(180.0)
 		if is_on_floor() and Input.is_action_just_pressed("Jump"):
 			velocity.y += self.JUMP
 		velocity.y -= self.GRAVITY * delta
