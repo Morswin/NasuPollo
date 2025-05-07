@@ -13,9 +13,11 @@ var rng := RandomNumberGenerator.new()
 @onready var collectable_object_spawner = %CollectableObjectSpawner
 @onready var collectable_object_timer = %CollectableObjectTimer
 @onready var main_menu = %MainMenu
+@onready var terrain = %Terrain
 
 
 func _ready():
+	terrain.generate_terrain_voxels()
 	GameSignals.gain_score.connect(gain_score)
 	GameSignals.loose_life_point.connect(loose_life_point)
 	GameSignals.game_begin.connect(game_begin)

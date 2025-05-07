@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://2qiodasnv557"]
+
+[ext_resource type="Script" uid="uid://dis5djjpcl0jx" path="res://voxel/voxel.gd" id="1_cthy6"]
+[ext_resource type="PackedScene" uid="uid://cutpphlgv2lxu" path="res://voxel/voxel.glb" id="2_pnlfb"]
+
+[node name="voxel" type="Node3D"]
+script = ExtResource("1_cthy6")
+
+[node name="voxel" parent="." instance=ExtResource("2_pnlfb")]
+
+[editable path="voxel"]
