@@ -4,9 +4,12 @@ extends Area3D
 
 const FALL_SPEED = 3.0
 
+@onready var animation_player = $AnimationPlayer
+
 
 func _ready():
 	GameSignals.game_over.connect(delete_self_on_game_over)
+	animation_player.current_animation = "default"
 
 func _physics_process(delta):
 	if !GameState.game_paused:
