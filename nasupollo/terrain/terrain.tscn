@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd1da7ai41vl0"]
+
+[ext_resource type="Script" uid="uid://bd7c12kvf4qo5" path="res://terrain/terrain.gd" id="1_0rasl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80nbo"]
+size = Vector3(10, 4, 1)
+
+[node name="Terrain" type="StaticBody3D" groups=["Environment"]]
+collision_mask = 0
+script = ExtResource("1_0rasl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+visible = false
+size = Vector3(10, 4, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_80nbo")
