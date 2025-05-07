@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgl8ae6vc5nsa"]
+[gd_scene load_steps=7 format=3 uid="uid://cgl8ae6vc5nsa"]
 
-[ext_resource type="Script" uid="uid://uu8wflpl3s8f" path="res://player.gd" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://uu8wflpl3s8f" path="res://character/player.gd" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://vdspuepjdl2j" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dafexo1eqv7km" path="res://character/character_placeholder.glb" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bd1da7ai41vl0" path="res://terrain/terrain.tscn" id="3_feb5d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mwb40"]
@@ -45,8 +46,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 collision_layer = 2
 script = ExtResource("1_80nbo")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Player"]
-size = Vector3(0.5, 1, 0.5)
+[node name="character_placeholder" parent="Player" instance=ExtResource("3_fc0e3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.137036, -0.508496, 0.00840598)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("BoxShape3D_mwb40")
