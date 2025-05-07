@@ -2,7 +2,7 @@ class_name Game
 extends Node3D
 
 
-const COLLECTABLE_OBJECT = preload("res://collectable_object.tscn")
+const COLLECTABLE_OBJECT = preload("res://collectable_object/collectable_object.tscn")
 const COLLECTABLE_OBJECT_SPAWN_SPREAD = 4.0
 
 @export var collectable_object_spawn_delay = 3.0  # In seconds
